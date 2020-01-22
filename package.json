@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "NODE_ENV=production node app.js",
+    "init": "cp .env.sample .env",
     "test": "mocha **test/*.js --exit"
   },
   "author": "",
