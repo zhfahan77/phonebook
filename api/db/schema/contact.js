@@ -5,7 +5,7 @@ const contactSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    phoneNumber: {
+    mobileNumber: {
         type: Number,
         required: true
     }
