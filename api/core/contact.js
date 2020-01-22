@@ -36,7 +36,28 @@ const getContact = (Params, DB) => {
 	})
 }
 
+const editContact = (Params, Data, DB) => {
+	return new Promise((resolve, reject) => {
+		if(!Params.mobileNumber || !Data.mobileNumber) {
+			return reject(ErrMsg.RequiredFieldNotFound)
+		}
+
+		DB
+			.editContact(Params, Data)
+			.then(result => {
+				if(!result) {
+					return reject(ErrMsg.NotFound)
+				}
+				resolve(result)
+			})
+			.catch(err => {
+				reject(err)
+			})
+	})
+}
+
 module.exports = {
 	getContacts,
-	getContact
+	getContact,
+	editContact
 }

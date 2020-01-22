@@ -24,7 +24,20 @@ const getContact = function(Params) {
     })
 }
 
+const editContact = function(Params, Data) {
+    return new Promise((resolve, reject) => {
+        Contact
+            .findOneAndUpdate({ "mobileNumber" : Params.mobileNumber }, { $set: Data }, { new : true })
+            .then(result => {
+                resolve(result)
+            }).catch(err => {
+                reject(err)
+            })
+    })
+}
+
 module.exports = {
     getContacts,
-    getContact
+    getContact,
+    editContact
 }

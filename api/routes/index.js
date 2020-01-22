@@ -16,6 +16,7 @@ router
 router
 	.route("/contacts/:mobileNumber")
 	.get(Contacts.getContact)
+	.put(Contacts.editContact)
 
 // Error handling if bad request
 router

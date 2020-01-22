@@ -28,7 +28,21 @@ const getContact = (req, res) => {
         })
 }
 
+const editContact = (req, res) => {
+    Core
+        .editContact(req.params, req.body, DB)
+        .then(result => {
+            res.status(200).json(result)
+            logger.info(res.locals.reqID + " " + 200)
+        })
+        .catch(err => {
+            res.status(err.statusCode || 500).json(err)
+            logger.error(res.locals.reqID + " " + JSON.stringify(err))
+        })
+}
+
 module.exports = {
     getContacts,
-    getContact
+    getContact,
+    editContact
 }

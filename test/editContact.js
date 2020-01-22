@@ -5,9 +5,9 @@ const Core = require("../api/core/contact.js"),
 let DB = {};
 let Data = [];
 
-describe("Get One Contact", () => {
+describe("Edit One Contact", () => {
     beforeEach(() => {
-        DB.getContact = (Params) => {
+        DB.editContact = (Params, Update) => {
             Data = [
                 {
                     "name": "test 1",
@@ -17,6 +17,7 @@ describe("Get One Contact", () => {
             return new Promise((resolve, reject) => {
                 const found = Data.find(contact => contact.mobileNumber === Params.mobileNumber)
                 if(found) {
+                    found.mobileNumber = Update.mobileNumber;
                     return resolve(found);
                 } else {
                     return reject(null)
@@ -30,16 +31,21 @@ describe("Get One Contact", () => {
         Data = [];
     })
 
-    it("it should return an object with matching contact details", (done) => {
+    it("it should return an updated object with matching contact details", (done) => {
         const Params = {
             "mobileNumber" : "8801787666777"
         };
+
+        const Update = {
+            "mobileNumber" : "8801787666111"
+        };
+
         Core
-            .getContact(Params, DB)
+            .editContact(Params, Update, DB)
             .then(result => {
                 result.should.be.an.Object;
                 result.should.have.a.property('name').equal(Data[0].name)
-                result.should.have.a.property('mobileNumber').equal(Data[0].mobileNumber)
+                result.should.have.a.property('mobileNumber').equal(Update.mobileNumber)
                 done();
             })
             .catch(err => {
@@ -48,7 +54,7 @@ describe("Get One Contact", () => {
     });
 
     it("it should return an object with error details if no contact found", (done) => {
-        DB.getContact = (Params) => {
+        DB.editContact = (Params, Update) => {
             return new Promise((resolve, reject) => {
                 resolve(null);
             });
@@ -58,7 +64,11 @@ describe("Get One Contact", () => {
             "mobileNumber" : "8801787666111"
         };
 
-        Core.getContact(Params, DB)
+        const Update = {
+            "mobileNumber" : "8801787666111"
+        };
+
+        Core.editContact(Params, Update, DB)
             .then(result => {
                 console.log(result);
             })
@@ -69,7 +79,7 @@ describe("Get One Contact", () => {
     });
 
     it("it should return an object with error details if no mobile number provided", (done) => {
-        DB.getContact = (Params) => {
+        DB.editContact = (Params, Update) => {
             return new Promise((resolve, reject) => {
                 resolve(null);
             });
@@ -77,7 +87,34 @@ describe("Get One Contact", () => {
 
         const Params = {};
 
-        Core.getContact(Params, DB)
+        const Update = {
+            "mobileNumber" : "8801787666111"
+        };
+
+        Core.editContact(Params, Update, DB)
+            .then(result => {
+                console.log(result);
+            })
+            .catch(err => {
+                err.should.be.equal(ErrMsg.RequiredFieldNotFound);
+                done();
+            });
+    });
+
+    it("it should return an object with error details if mobile number provided in Updated data", (done) => {
+        DB.editContact = (Params, Update) => {
+            return new Promise((resolve, reject) => {
+                resolve(null);
+            });
+        };
+
+        const Params = {
+            "mobileNumber" : "8801787666111"
+        };
+
+        const Update = {}
+
+        Core.editContact(Params, Update, DB)
             .then(result => {
                 console.log(result);
             })

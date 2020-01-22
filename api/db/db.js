@@ -4,7 +4,8 @@ const DATABASE_URL = process.env.DATABASE_URL;
 
 const options = {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useFindAndModify: false
 }
 
 const db = mongoose.connect(DATABASE_URL, options)
