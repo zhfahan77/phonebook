@@ -36,8 +36,21 @@ const editContact = function(Params, Data) {
     })
 }
 
+const deleteContact = function(Params) {
+    return new Promise((resolve, reject) => {
+        Contact
+            .findOneAndRemove({ "mobileNumber" : Params.mobileNumber })
+            .then(result => {
+                resolve(result)
+            }).catch(err => {
+                reject(err)
+            })
+    })
+}
+
 module.exports = {
     getContacts,
     searchContacts,
-    editContact
+    editContact,
+    deleteContact
 }

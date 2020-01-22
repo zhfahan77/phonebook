@@ -17,6 +17,7 @@ router
 	.route("/contacts/:mobileNumber")
 	.get(Contacts.searchContacts)
 	.put(Contacts.editContact)
+	.delete(Contacts.deleteContact)
 
 // Error handling if bad request
 router
