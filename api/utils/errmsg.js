@@ -34,11 +34,11 @@ const SomethingWentWrong = {
 }
 
 module.exports = {
-    NotFound: NotFound,
-    RequiredFieldNotFound: RequiredFieldNotFound,
-    AddPetRequiredFieldsNotFound: AddPetRequiredFieldsNotFound,
-    DefaultRouteException: DefaultRouteException,
-    BadRequest: BadRequest,
-    OK: OK,
-    SomethingWentWrong: SomethingWentWrong,
+    NotFound,
+    RequiredFieldNotFound,
+    AddPetRequiredFieldsNotFound,
+    DefaultRouteException,
+    BadRequest,
+    OK,
+    SomethingWentWrong,
 }
