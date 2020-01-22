@@ -5,6 +5,9 @@
   "main": "app.js",
   "scripts": {
     "start": "NODE_ENV=production node app.js",
+    "start:docker": "docker-compose up -d --build",
+    "stop:docker": "docker-compose down",
+    "clean:docker": "docker-compose down -v",
     "init": "cp .env.sample .env",
     "test": "mocha **test/*.js --exit"
   },

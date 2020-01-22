@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+
+  app:
+    build: .
+    volumes:
+      - .:/app
+    ports:
+      - "${PORT}:${PORT}"
+    environment:
+      PORT: "${PORT}"
+      DATABASE_URL: "${DATABASE_URL}"
+
+  mongodb:
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_vol_phonebook:/data/db
+
+volumes:
+  mongodb_vol_phonebook:
