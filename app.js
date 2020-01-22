@@ -1,5 +1,5 @@
-// Require all necessary files
 require('dotenv').config()
+require("./api/db/db.js");
 const express = require("express"),
 app = express(),
 Coniguration = require('./appconfig.js');
