@@ -38,7 +38,7 @@ const getContact = (Params, DB) => {
 
 const editContact = (Params, Data, DB) => {
 	return new Promise((resolve, reject) => {
-		if(!Params.mobileNumber || !Data.mobileNumber) {
+		if(!Params.mobileNumber || !Data.mobileNumber || !Data.name) {
 			return reject(ErrMsg.RequiredFieldNotFound)
 		}
 

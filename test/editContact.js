@@ -15,7 +15,7 @@ describe("Edit One Contact", () => {
                 }
             ]
             return new Promise((resolve, reject) => {
-                const found = Data.find(contact => contact.mobileNumber === Params.mobileNumber)
+                const found = Data.find(contact => (contact.mobileNumber === Params.mobileNumber) && (contact.name === Update.name));
                 if(found) {
                     found.mobileNumber = Update.mobileNumber;
                     return resolve(found);
@@ -33,11 +33,12 @@ describe("Edit One Contact", () => {
 
     it("it should return an updated object with matching contact details", (done) => {
         const Params = {
-            "mobileNumber" : "8801787666777"
+            "mobileNumber": "8801787666777"
         };
 
         const Update = {
-            "mobileNumber" : "8801787666111"
+            "mobileNumber": "8801787666111",
+            "name": "test 1"
         };
 
         Core
@@ -61,11 +62,13 @@ describe("Edit One Contact", () => {
         };
 
         const Params = {
-            "mobileNumber" : "8801787666111"
+            "mobileNumber": "8801787666111",
+            "name": "test 2"
         };
 
         const Update = {
-            "mobileNumber" : "8801787666111"
+            "mobileNumber": "8801787666111",
+            "name": "test 1"
         };
 
         Core.editContact(Params, Update, DB)
@@ -85,10 +88,38 @@ describe("Edit One Contact", () => {
             });
         };
 
-        const Params = {};
+        const Params = {
+            "name": "test 1"
+        };
 
         const Update = {
-            "mobileNumber" : "8801787666111"
+            "mobileNumber": "8801787666111",
+            "name": "test 1"
+        };
+
+        Core.editContact(Params, Update, DB)
+            .then(result => {
+                console.log(result);
+            })
+            .catch(err => {
+                err.should.be.equal(ErrMsg.RequiredFieldNotFound);
+                done();
+            });
+    });
+
+    it("it should return an object with error details if no contact name provided in Updated data", (done) => {
+        DB.editContact = (Params, Update) => {
+            return new Promise((resolve, reject) => {
+                resolve(null);
+            });
+        };
+
+        const Params = {
+            "mobileNumber": "8801787666111"
+        };
+
+        const Update = {
+            "mobileNumber": "8801787666111"
         };
 
         Core.editContact(Params, Update, DB)
@@ -109,10 +140,12 @@ describe("Edit One Contact", () => {
         };
 
         const Params = {
-            "mobileNumber" : "8801787666111"
+            "mobileNumber": "8801787666111"
         };
 
-        const Update = {}
+        const Update = {
+            "name": "test 1"
+        }
 
         Core.editContact(Params, Update, DB)
             .then(result => {
