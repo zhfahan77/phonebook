@@ -8,9 +8,14 @@ const RequiredFieldNotFound = {
     "statusCode": 404
 }
 
-const AddPetRequiredFieldsNotFound = {
-    "message": "Required Fields Not Found; name, color, age, breed, owner_id fields are required",
+const AddContactRequiredFieldsNotFound = {
+    "message": "Required Fields Not Found; name, mobileNumber fields are required",
     "statusCode": 404
+}
+
+const ContactAlreadyAdded = {
+    "message": "Contact Already Added with this name",
+    "statusCode": 422
 }
 
 const DefaultRouteException = {
@@ -36,9 +41,10 @@ const SomethingWentWrong = {
 module.exports = {
     NotFound,
     RequiredFieldNotFound,
-    AddPetRequiredFieldsNotFound,
+    AddContactRequiredFieldsNotFound,
     DefaultRouteException,
     BadRequest,
     OK,
     SomethingWentWrong,
+    ContactAlreadyAdded
 }

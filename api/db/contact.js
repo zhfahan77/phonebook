@@ -48,9 +48,24 @@ const deleteContact = function(Params) {
     })
 }
 
+const addContact = function(Data) {
+    return new Promise((resolve, reject) => {
+        const contact = new Contact(Data);
+
+        contact
+            .save()
+            .then(result => {
+                resolve(result)
+            }).catch(err => {
+                reject(err)
+            })
+    })
+}
+
 module.exports = {
     getContacts,
     searchContacts,
     editContact,
-    deleteContact
+    deleteContact,
+    addContact
 }

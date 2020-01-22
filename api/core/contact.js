@@ -76,9 +76,33 @@ const deleteContact = (Params, DB) => {
 	})
 }
 
+const addContact = (Data, DB) => {
+	return new Promise((resolve, reject) => {
+		if(!Data.mobileNumber || !Data.name) {
+			return reject(ErrMsg.RequiredFieldNotFound)
+		}
+
+		DB
+			.addContact(Data)
+			.then(result => {
+				if(!result) {
+					return reject(ErrMsg.NotFound)
+				}
+				resolve(result)
+			})
+			.catch(err => {
+				if(err.code === 11000) {
+					return reject(ErrMsg.ContactAlreadyAdded)
+				}
+				reject(err)
+			})
+	})
+}
+
 module.exports = {
 	getContacts,
 	searchContacts,
 	editContact,
-	deleteContact
+	deleteContact,
+	addContact
 }

@@ -12,6 +12,7 @@ router
 router
 	.route("/contacts")
     .get(Contacts.getContacts)
+    .post(Contacts.addContact)
 
 router
 	.route("/contacts/:mobileNumber")
