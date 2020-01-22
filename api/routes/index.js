@@ -11,7 +11,11 @@ router
 
 router
 	.route("/contacts")
-	.get(Contacts.getContacts)
+    .get(Contacts.getContacts)
+
+router
+	.route("/contacts/:mobileNumber")
+	.get(Contacts.getContact)
 
 // Error handling if bad request
 router

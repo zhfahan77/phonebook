@@ -12,6 +12,19 @@ const getContacts = function() {
     })
 }
 
+const getContact = function(Params) {
+    return new Promise((resolve, reject) => {
+        Contact
+            .findOne({ "mobileNumber" : Params.mobileNumber })
+            .then(result => {
+                resolve(result)
+            }).catch(err => {
+                reject(err)
+            })
+    })
+}
+
 module.exports = {
-    getContacts
+    getContacts,
+    getContact
 }
