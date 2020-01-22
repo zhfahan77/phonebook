@@ -31,6 +31,8 @@ describe("Get all Contacts", () => {
             .then(result => {
                 result.should.be.an.Array;
                 result.length.should.be.equal(Data.length);
+                result[0].should.have.a.property('name').equal(Data[0].name)
+                result[0].should.have.a.property('mobileNumber').equal(Data[0].mobileNumber)
                 done();
             })
             .catch(err => {
