@@ -16,16 +16,16 @@ const getContacts = (DB) => {
 	})
 }
 
-const getContact = (Params, DB) => {
+const searchContacts = (Params, DB) => {
 	return new Promise((resolve, reject) => {
 		if(!Params.mobileNumber) {
 			return reject(ErrMsg.RequiredFieldNotFound)
 		}
 
 		DB
-			.getContact(Params)
+			.searchContacts(Params)
 			.then(result => {
-				if(!result) {
+				if(!result.length) {
 					return reject(ErrMsg.NotFound)
 				}
 				resolve(result)
@@ -58,6 +58,6 @@ const editContact = (Params, Data, DB) => {
 
 module.exports = {
 	getContacts,
-	getContact,
+	searchContacts,
 	editContact
 }

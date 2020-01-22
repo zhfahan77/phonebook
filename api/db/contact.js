@@ -12,10 +12,10 @@ const getContacts = function() {
     })
 }
 
-const getContact = function(Params) {
+const searchContacts = function(Params) {
     return new Promise((resolve, reject) => {
         Contact
-            .findOne({ "mobileNumber" : Params.mobileNumber })
+            .find({ "mobileNumber" : Params.mobileNumber })
             .then(result => {
                 resolve(result)
             }).catch(err => {
@@ -38,6 +38,6 @@ const editContact = function(Params, Data) {
 
 module.exports = {
     getContacts,
-    getContact,
+    searchContacts,
     editContact
 }

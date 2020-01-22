@@ -15,9 +15,9 @@ const getContacts = (req, res) => {
         })
 }
 
-const getContact = (req, res) => {
+const searchContacts = (req, res) => {
     Core
-        .getContact(req.params, DB)
+        .searchContacts(req.params, DB)
         .then(result => {
             res.status(200).json(result)
             logger.info(res.locals.reqID + " " + 200)
@@ -43,6 +43,6 @@ const editContact = (req, res) => {
 
 module.exports = {
     getContacts,
-    getContact,
+    searchContacts,
     editContact
 }
