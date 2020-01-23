@@ -43,6 +43,10 @@ $ npm install
 $ npm start
 ```
 
+```
+This application will start on 3000 port on http://localhost:3000 as default. You can change the port from .env file and restart the application server.
+```
+
 `Stop the application ...`
 
 ```sh
