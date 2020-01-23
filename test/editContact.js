@@ -132,7 +132,7 @@ describe("Edit One Contact", () => {
             });
     });
 
-    it("it should return an object with error details if mobile number provided in Updated data", (done) => {
+    it("it should return an object with error details if no mobile number provided in Updated data", (done) => {
         DB.editContact = (Params, Update) => {
             return new Promise((resolve, reject) => {
                 resolve(null);
@@ -153,6 +153,58 @@ describe("Edit One Contact", () => {
             })
             .catch(err => {
                 err.should.be.equal(ErrMsg.RequiredFieldNotFound);
+                done();
+            });
+    });
+
+    it("it should return an object with error details if invalid mobile number provided in Updated data", (done) => {
+        DB.editContact = (Params, Update) => {
+            return new Promise((resolve, reject) => {
+                resolve(null);
+            });
+        };
+
+        const Params = {
+            "mobileNumber": "8801787666111"
+        };
+
+        const Update = {
+            "name": "test 1",
+            "mobileNumber": "87666112"
+        }
+
+        Core.editContact(Params, Update, DB)
+            .then(result => {
+                console.log(result);
+            })
+            .catch(err => {
+                err.should.be.equal(ErrMsg.NotAValidPhoneNumber);
+                done();
+            });
+    });
+
+    it("it should return an object with error details if invalid mobile number provided in params data", (done) => {
+        DB.editContact = (Params, Update) => {
+            return new Promise((resolve, reject) => {
+                resolve(null);
+            });
+        };
+
+        const Params = {
+            "mobileNumber": "787666111"
+        };
+
+        const Update = {
+            "name": "test 1",
+            "mobileNumber": "8801787666112"
+        }
+
+        Core.editContact(Params, Update, DB)
+            .then(result => {
+                console.log(result);
+            })
+            .catch(err => {
+                err.should.be.equal(ErrMsg.NotAValidPhoneNumber);
                 done();
             });
     });

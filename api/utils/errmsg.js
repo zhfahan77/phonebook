@@ -38,6 +38,11 @@ const SomethingWentWrong = {
     "statusCode": 500
 }
 
+const NotAValidPhoneNumber = {
+	"message": "Phone Number is not valid, it should be a valid BD Phone Number 8801XXXXXXXXX/01XXXXXXXXX",
+    "statusCode": 422
+}
+
 module.exports = {
     NotFound,
     RequiredFieldNotFound,
@@ -46,5 +51,6 @@ module.exports = {
     BadRequest,
     OK,
     SomethingWentWrong,
-    ContactAlreadyAdded
+    ContactAlreadyAdded,
+    NotAValidPhoneNumber
 }

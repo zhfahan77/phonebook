@@ -79,4 +79,26 @@ describe("Add One Contact", () => {
                 done();
             });
     });
+
+    it("it should return an object with error details if invalid phone number is given", (done) => {
+        DB.addContact = (Contact) => {
+            return new Promise((resolve, reject) => {
+                resolve(null);
+            });
+        };
+
+        const NewContact = {
+            "mobileNumber": "1787666111",
+            "name": "test"
+        };
+
+        Core.addContact(NewContact, DB)
+            .then(result => {
+                console.log(result);
+            })
+            .catch(err => {
+                err.should.be.equal(ErrMsg.NotAValidPhoneNumber);
+                done();
+            });
+    });
 });

@@ -87,4 +87,19 @@ describe("Search Contacts", () => {
                 done();
             });
     });
+
+    it("it should return an object with error details if invalid mobile number provided", (done) => {
+        const Params = {
+            "mobileNumber" : "1787666111"
+        };
+
+        Core.searchContacts(Params, DB)
+            .then(result => {
+                console.log(result);
+            })
+            .catch(err => {
+                err.should.be.equal(ErrMsg.NotAValidPhoneNumber);
+                done();
+            });
+    });
 });

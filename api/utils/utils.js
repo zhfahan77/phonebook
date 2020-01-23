@@ -8,7 +8,10 @@ const HealthCheck = function(req, res) {
 	res.status(200).json(ErrMsg.OK)
 }
 
+const phone_regex = /(^(88)?(01){1}[3456789]{1}(\d){8})$/
+
 module.exports = {
 	RouteExceptionHandler : RouteExceptionHandler,
-	HealthCheck : HealthCheck
+	HealthCheck : HealthCheck,
+	phone_regex
 }

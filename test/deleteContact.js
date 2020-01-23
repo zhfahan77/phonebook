@@ -84,4 +84,19 @@ describe("Delete One Contact", () => {
                 done();
             });
     });
+
+    it("it should return an object with error details if invalid mobile number provided", (done) => {
+        const Params = {
+            "mobileNumber": "787666111"
+        };
+
+        Core.deleteContact(Params, DB)
+            .then(result => {
+                console.log(result);
+            })
+            .catch(err => {
+                err.should.be.equal(ErrMsg.NotAValidPhoneNumber);
+                done();
+            });
+    });
 });

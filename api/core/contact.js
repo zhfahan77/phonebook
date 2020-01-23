@@ -1,4 +1,5 @@
 const ErrMsg = require("../utils/errmsg.js")
+const { phone_regex } = require("../utils/utils.js");
 
 const getContacts = (DB) => {
 	return new Promise((resolve, reject) => {
@@ -22,6 +23,10 @@ const searchContacts = (Params, DB) => {
 			return reject(ErrMsg.RequiredFieldNotFound)
 		}
 
+		if(!phone_regex.test(Params.mobileNumber)) {
+			return reject(ErrMsg.NotAValidPhoneNumber)
+		}
+
 		DB
 			.searchContacts(Params)
 			.then(result => {
@@ -40,6 +45,10 @@ const editContact = (Params, Data, DB) => {
 	return new Promise((resolve, reject) => {
 		if(!Params.mobileNumber || !Data.mobileNumber || !Data.name) {
 			return reject(ErrMsg.RequiredFieldNotFound)
+		}
+
+		if( !phone_regex.test(Data.mobileNumber) || !phone_regex.test(Params.mobileNumber)) {
+			return reject(ErrMsg.NotAValidPhoneNumber)
 		}
 
 		DB
@@ -62,6 +71,10 @@ const deleteContact = (Params, DB) => {
 			return reject(ErrMsg.RequiredFieldNotFound)
 		}
 
+		if(!phone_regex.test(Params.mobileNumber)) {
+			return reject(ErrMsg.NotAValidPhoneNumber)
+		}
+
 		DB
 			.deleteContact(Params)
 			.then(result => {
@@ -80,6 +93,10 @@ const addContact = (Data, DB) => {
 	return new Promise((resolve, reject) => {
 		if(!Data.mobileNumber || !Data.name) {
 			return reject(ErrMsg.RequiredFieldNotFound)
+		}
+
+		if(!phone_regex.test(Data.mobileNumber)) {
+			return reject(ErrMsg.NotAValidPhoneNumber)
 		}
 
 		DB
